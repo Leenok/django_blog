@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from myblog.models import Post
@@ -23,3 +23,16 @@ class AboutView(View):
             'myblog/about.html'
         )
     
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            'myblog/contact.html'
+        )
+    
+class PostDetailView(View):
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, url=slug)
+        return render(request, 'myblog/post_detail.html', context={
+            'post': post
+    })
