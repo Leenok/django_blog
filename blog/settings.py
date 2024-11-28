@@ -133,3 +133,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # LOGOUT_REDIRECT_URL = '/'
+
+# mail
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "L-incanto@mail.ru"
+EMAIL_HOST_PASSWORD = "password"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
