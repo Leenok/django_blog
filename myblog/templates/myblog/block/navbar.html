@@ -18,9 +18,9 @@
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                     <button class="btn btn-outline-success me-2" type="submit">Найти</button>
-                    <button type="button" class="btn btn-outline-light me-2">Вход</button>
+                    <a href="{% url 'signin' %}" class="btn btn-outline-light me-2">Вход</a>
                     <a href="{% url 'signup' %}" class="btn btn-outline-light me-2">Регистрация</a>
-                    <button type="button" class="btn btn-outline-light">Выход</button>
+                    <a href="{% url 'signout' %}" class="btn btn-outline-light">Выход</a>
                 </form>
           </div>
         </div>

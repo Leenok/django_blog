@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.views import View
 from django.core.paginator import Paginator
 from .models import Post
-from .forms import SignUpForm
-from django.contrib.auth import login
+from .forms import SignUpForm, SignInForm
+from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponseRedirect
 
 class MainView(View):
@@ -56,3 +56,33 @@ class SignUpView(View):
         return render(request, 'myblog/signup.html', context={
             'form': form,
         })
+    
+class SignInView(View):
+    def get(self, request, *args, **kwargs):
+        form = SignInForm()
+        return render(request, 'myblog/signin.html', context={
+            'form':form
+        })
+    
+    def post(self, request, *args, **kwargs):
+        form = SignInForm(request.POST)
+
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                form.add_error(None, "Неправильный пароль или указанная учётная запись не существует!")
+                return render(request, 'myblog/signin.html', {"form": form})
+        return render(request, 'myblog/signin.html', context={
+            'form': form,
+        })
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+

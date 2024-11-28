@@ -51,3 +51,29 @@ class SignUpForm(forms.Form):
         user.save()
         auth = authenticate(**self.cleaned_data)
         return auth
+    
+
+class SignInForm(forms.Form):
+    username = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class':'form-control',
+            'id':'inputUsername',
+        }),
+    )
+
+    password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            'class':'form-control mt-2',
+            'id':'inputPassword',
+        }),
+    )
+
+    # def isUser(self, username, password):
+    #     print(username, password)
+
+    #     auth = authenticate(request, username=self.username, password=self.password)
+    #     print(auth)
+        # return auth
